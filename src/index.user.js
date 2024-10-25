@@ -15,7 +15,7 @@
   "use strict";
 
   const SELECTORS = {
-    container: ".commit-info.merge-requests",
+    container: ".commit-info.merge-requests>span:not(.gl-spinner-container)",
   };
 
   const MESSAGES = {
@@ -42,10 +42,12 @@
 
       const setIntervalId = setInterval(() => {
         container = document.querySelector(SELECTORS.container);
-        const otherInfo = document.querySelectorAll(
-          ".info-well>.well-segment+div button"
-        );
-        if (container && otherInfo.length === 2) {
+        console.log({ container });
+
+        // const otherInfo = document.querySelectorAll(
+        //   ".info-well>.well-segment+div button"
+        // );
+        if (container) {
           clearInterval(setIntervalId);
           window.console.info(
             `%c ${MESSAGES.containerFound}`,
@@ -75,7 +77,7 @@
     link.id = "archived-repo-button";
     link.className = "ml-3 gl-button btn btn-default btn-md";
 
-    return link;
+    container.appendChild(link);
   };
 
   const init = async () => {
@@ -89,7 +91,7 @@
 
     if (containerLink) return;
 
-    const link = renderUiElements();
+    renderUiElements();
   };
 
   init();
