@@ -41,7 +41,7 @@
       let attempt = 0;
 
       const setIntervalId = setInterval(() => {
-        container = document.getElementById(SELECTORS.container);
+        container = document.querySelector(SELECTORS.container);
         if (container) {
           clearInterval(setIntervalId);
           window.console.info(
@@ -65,7 +65,7 @@
 
   const renderUiElements = () => {
     const link = document.createElement("a");
-    const currentLink = window.location;
+    const currentLink = window.location.href;
     const newLink = currentLink.replace("orbico", "orbico-platform");
     link.href = newLink;
     link.className = "ml-3 gl-button btn btn-default btn-md";
