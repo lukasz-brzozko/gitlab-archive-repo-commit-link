@@ -15,7 +15,7 @@
   "use strict";
 
   const IDS = {
-    container: "container",
+    container: ".commit-info.merge-request-info",
   };
 
   const MESSAGES = {
@@ -27,17 +27,6 @@
   };
 
   let container;
-
-  const linkStyles = async () => {
-    const styleTag = document.createElement("style");
-    styleTag.textContent = `
-    body {
-    
-    }
-    `;
-
-    document.body.prepend(styleTag);
-  };
 
   const handleContainerNotFound = () => {
     window.console.error(
@@ -75,7 +64,17 @@
   };
 
   const renderUiElements = () => {
-    console.log("renderUiElements");
+    const link = document.createElement("a");
+    const currentLink = window.location;
+    const newLink = currentLink.replace("orbico", "orbico-platform");
+    link.href = newLink;
+    link.className = "ml-3 gl-button btn btn-default btn-md";
+
+    const containerLink = container.querySelector("a");
+
+    if (containerLink) return;
+
+    container.appendChild(link);
   };
 
   const init = async () => {
@@ -85,7 +84,6 @@
       return handleContainerNotFound();
     }
 
-    linkStyles();
     renderUiElements();
   };
 
