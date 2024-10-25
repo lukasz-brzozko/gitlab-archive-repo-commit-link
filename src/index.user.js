@@ -14,15 +14,15 @@
 (function () {
   "use strict";
 
-  const IDS = {
-    container: ".commit-info.merge-request-info",
+  const SELECTORS = {
+    container: ".commit-info.merge-requests",
   };
 
   const MESSAGES = {
-    containerFound: `Znaleziono formularz ${IDS.container}`,
+    containerFound: `Znaleziono formularz ${SELECTORS.container}`,
     error: {
       basic: "Error",
-      containerNotFound: `Nie znaleziono kontenera ${IDS.container}. Skrypt został wstrzymany.`,
+      containerNotFound: `Nie znaleziono kontenera ${SELECTORS.container}. Skrypt został wstrzymany.`,
     },
   };
 
@@ -41,7 +41,7 @@
       let attempt = 0;
 
       const setIntervalId = setInterval(() => {
-        container = document.getElementById(IDS.container);
+        container = document.getElementById(SELECTORS.container);
         if (container) {
           clearInterval(setIntervalId);
           window.console.info(
