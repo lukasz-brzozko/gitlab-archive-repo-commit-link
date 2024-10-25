@@ -68,13 +68,10 @@
     const currentLink = window.location.href;
     const newLink = currentLink.replace("orbico", "orbico-platform");
     link.href = newLink;
+    link.textContent = "Check the archived repository";
     link.className = "ml-3 gl-button btn btn-default btn-md";
 
-    const containerLink = container.querySelector("a");
-
-    if (containerLink) return;
-
-    container.appendChild(link);
+    container.querySelector("span")?.appendChild(link);
   };
 
   const init = async () => {
@@ -83,6 +80,10 @@
     } catch (err) {
       return handleContainerNotFound();
     }
+
+    const containerLink = container.querySelector("a");
+
+    if (containerLink) return;
 
     renderUiElements();
   };
