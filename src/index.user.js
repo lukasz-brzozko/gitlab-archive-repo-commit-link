@@ -42,7 +42,10 @@
 
       const setIntervalId = setInterval(() => {
         container = document.querySelector(SELECTORS.container);
-        if (container) {
+        const otherInfo = document.querySelectorAll(
+          ".info-well>.well-segment+div button"
+        );
+        if (container && otherInfo.length === 2) {
           clearInterval(setIntervalId);
           window.console.info(
             `%c ${MESSAGES.containerFound}`,
@@ -75,17 +78,6 @@
     return link;
   };
 
-  const observeContainer = (link) => {
-    const observer = new MutationObserver(([entry]) => {
-      console.log("append child");
-
-      entry.target.appendChild(link);
-    });
-    const containersContent = container.querySelector("span");
-
-    observer.observe(containersContent);
-  };
-
   const init = async () => {
     try {
       await lookForAppContainer();
@@ -98,7 +90,6 @@
     if (containerLink) return;
 
     const link = renderUiElements();
-    observeContainer(link);
   };
 
   init();
