@@ -69,9 +69,21 @@
     const newLink = currentLink.replace("orbico", "orbico-platform");
     link.href = newLink;
     link.textContent = "Check the archived repository";
+    link.id = "archived-repo-button";
     link.className = "ml-3 gl-button btn btn-default btn-md";
 
-    container.querySelector("span")?.appendChild(link);
+    return link;
+  };
+
+  const observeContainer = (link) => {
+    const observer = new MutationObserver(([entry]) => {
+      console.log("append child");
+
+      entry.target.appendChild(link);
+    });
+    const containersContent = container.querySelector("span");
+
+    observer.observe(containersContent);
   };
 
   const init = async () => {
@@ -85,7 +97,8 @@
 
     if (containerLink) return;
 
-    renderUiElements();
+    const link = renderUiElements();
+    observeContainer(link);
   };
 
   init();
